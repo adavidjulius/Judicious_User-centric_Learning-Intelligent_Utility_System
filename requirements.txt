@@ -1,6 +1,5 @@
 airllm
 torch
 transformers
-coqui-tts
 soundfile
 gradio
