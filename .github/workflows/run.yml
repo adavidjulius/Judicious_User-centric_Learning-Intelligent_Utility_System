@@ -1,24 +1,34 @@
-name: Run Python Script
+name: Run Python App
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
 
-      - name: Run script
+      - name: Install Dependencies
+        run: |
+          pip install airllm
+          pip install TTS
+
+      - name: Show Files (Debug)
+        run: ls -la
+
+      - name: Run App
         run: python app.py
